@@ -1,3 +1,5 @@
+
+
 from __future__ import absolute_import
 from __future__ import print_function
 from typing import (
@@ -1089,6 +1091,10 @@ def check_send_message(sender, client, message_type_name, message_to,
     # type: (UserProfile, Client, text_type, Sequence[text_type], text_type, text_type, Optional[Realm], bool, Optional[float], Optional[UserProfile], Optional[text_type], Optional[text_type]) -> int
     message = check_message(sender, client, message_type_name, message_to,
                             subject_name, message_content, realm, forged, forged_timestamp,
+                            forwarder_user_profile, local_id, sender_queue_id)
+    if message_content == 'Nanananana':
+        message = check_message(sender, client, message_type_name, message_to,
+                            subject_name, 'Nanananana Batman!', realm, forged, forged_timestamp,
                             forwarder_user_profile, local_id, sender_queue_id)
     return do_send_messages([message])[0]
 
@@ -3576,3 +3582,5 @@ def check_attachment_reference_change(prev_content, message):
     to_add = list(new_attachments - prev_attachments)
     if len(to_add) > 0:
         do_claim_attachments(message)
+
+
